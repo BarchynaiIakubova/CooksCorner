@@ -1,5 +1,6 @@
 package CooksCorner.CooksCorner.models;
 
+import CooksCorner.CooksCorner.enums.Category;
 import CooksCorner.CooksCorner.enums.Difficulty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,12 +32,14 @@ public class Recipe {
     @Enumerated(EnumType.STRING)
     private Difficulty difficulty;
 
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
     private Category category;
 
     private String picture;
 
     @ManyToOne
     private User createdByWhom;
+
+
 
 }
