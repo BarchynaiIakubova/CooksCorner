@@ -1,6 +1,5 @@
 package CooksCorner.CooksCorner.models;
 
-import CooksCorner.CooksCorner.enums.Unit;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "ingredients")
-public class Ingredients {
+public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "in_gen")
@@ -24,9 +23,9 @@ public class Ingredients {
 
     private Double quantityOfIngredients;
 
+    private String unit;
+
     @OneToOne
     private Recipe recipe;
 
-    @Enumerated(EnumType.STRING)
-    private Unit unit;
 }
