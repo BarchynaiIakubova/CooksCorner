@@ -1,5 +1,6 @@
 package CooksCorner.CooksCorner.services;
 
+import CooksCorner.CooksCorner.config.jwt.JwtService;
 import CooksCorner.CooksCorner.dto.requests.AuthenticationRequest;
 import CooksCorner.CooksCorner.dto.requests.RegisterRequest;
 import CooksCorner.CooksCorner.dto.responses.AuthenticationResponse;

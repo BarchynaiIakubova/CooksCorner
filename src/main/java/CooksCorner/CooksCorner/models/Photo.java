@@ -26,4 +26,9 @@ public class Photo {
 
     @ManyToOne
     private Recipe recipe;
+
+    public Photo(String key) {
+
+        this.link = key;
+    }
 }
