@@ -9,7 +9,7 @@ app:
 spring:
     datasource:
         password: ${DATABASE_PASSWORD}
-        url: jdbc:postgresql://localhost:5433/cooks_corner
+        url: jdbc:postgresql://localhost:5432/cooks_corner
         username: ${DATABASE_USER}
         hikari:
             auto-commit: false
