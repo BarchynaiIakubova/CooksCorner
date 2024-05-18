@@ -1,3 +1,46 @@
+server:
+    port: 9090
+
+app:
+    jwt:
+        #    expired-at: 750
+        secret-word: ${SECRET_WORD}
+
 spring:
-    application:
-        name: CooksCorner
+    datasource:
+        password: ${DATABASE_PASSWORD}
+        url: jdbc:postgresql://localhost:5433/cooks_corner
+        username: ${DATABASE_USER}
+        hikari:
+            auto-commit: false
+
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                format_sql: true
+                show-sql: true
+
+springdoc:
+    swagger-ui:
+        enabled: true
+        path: /swagger
+
+cloud:
+    aws:
+        bucket:
+            access-key: ${AWS_ACCESS_KEY}
+            default:
+                avatar:
+            name: neobook
+            path: ${AWS_PATH}
+            region: ${REGION}
+            secret-key: ${AWS_SECRET_KEY}
+
+logging:
+    level:
+        org:
+            springframework:
+                security: DEBUG
