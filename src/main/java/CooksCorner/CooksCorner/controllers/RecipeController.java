@@ -57,7 +57,7 @@ public class RecipeController {
     }
 
     @GetMapping("/category/{category}")
-    @Operation(summary = "get recipe by Id", description = "This method gets recipe by id")
+    @Operation(summary = "get recipe by category", description = "This method gets recipe by category")
     List<RecipeResponseByCategory> findRecipesByCategory(@PathVariable Category category) {
 
         return recipeService.findRecipesByCategory(category);
