@@ -5,6 +5,7 @@ import CooksCorner.CooksCorner.dto.responses.RecipeResponse;
 import CooksCorner.CooksCorner.dto.responses.RecipeResponseByCategory;
 import CooksCorner.CooksCorner.dto.responses.RecipeResponseSearch;
 import CooksCorner.CooksCorner.dto.responses.Response;
+import CooksCorner.CooksCorner.enums.Category;
 import CooksCorner.CooksCorner.services.RecipeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -55,11 +56,11 @@ public class RecipeController {
         return recipeService.findById(recipeId);
     }
 
-//    @GetMapping
-//    @Operation(summary = "get recipe by Id", description = "This method gets recipe by id")
-//    List<RecipeResponseByCategory> findRecipesByCategory() {
-//
-//        return recipeService.findRecipesByCategory();
-//    }
+    @GetMapping("/category/{category}")
+    @Operation(summary = "get recipe by Id", description = "This method gets recipe by id")
+    List<RecipeResponseByCategory> findRecipesByCategory(@PathVariable Category category) {
+
+        return recipeService.findRecipesByCategory(category);
+    }
 
 }
