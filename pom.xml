@@ -101,14 +101,28 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.12.0</version>
-				<configuration>
-					<source>17</source>
-					<target>17</target>
-				</configuration>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.apache.maven.plugins</groupId>-->
+
+<!--				<artifactId>maven-jar-plugin</artifactId>-->
+<!--				<artifactId>maven-compiler-plugin</artifactId>-->
+<!--				<version>3.12.0</version>-->
+<!--				<configuration>-->
+<!--to create main class-->
+<!--					<archive>-->
+<!--						<manifest>-->
+<!--							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>-->
+<!--							<mainClass>CooksCorner.CooksCorner.CooksCornerApplication</mainClass> &lt;!&ndash; Change this to your actual main class &ndash;&gt;-->
+<!--						</manifest>-->
+<!--					</archive>-->
+
+<!--					<source>17</source>-->
+<!--					<target>17</target>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 

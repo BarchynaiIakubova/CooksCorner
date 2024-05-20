@@ -2,6 +2,7 @@ package CooksCorner.CooksCorner.controllers;
 
 import CooksCorner.CooksCorner.dto.responses.PhotoResponse;
 import CooksCorner.CooksCorner.services.S3Service;
+import CooksCorner.CooksCorner.validations.UserValidate;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

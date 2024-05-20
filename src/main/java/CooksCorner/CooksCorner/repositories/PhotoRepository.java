@@ -10,4 +10,16 @@ public interface PhotoRepository extends JpaRepository<Photo, Long> {
 
     @Query("select i from Photo i where i.link = :link")
     Optional<Photo> findByLink(String link);
+
+    @Query("""
+        select p.link
+        from Photo p where p.recipe.id = :recipeId
+           """)
+    String findPhotoLinkByRecipeId(Long recipeId);
+
+    @Query("""
+        select p
+        from Photo p where p.recipe.id = :recipeId
+           """)
+    Photo findPhotoByRecipeId(Long recipeId);
 }
