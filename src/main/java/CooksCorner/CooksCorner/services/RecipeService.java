@@ -3,6 +3,7 @@ package CooksCorner.CooksCorner.services;
 import CooksCorner.CooksCorner.dto.requests.IngredientRequest;
 import CooksCorner.CooksCorner.dto.requests.RecipeRequest;
 import CooksCorner.CooksCorner.dto.responses.*;
+import CooksCorner.CooksCorner.enums.Category;
 import CooksCorner.CooksCorner.exceptions.NotFoundException;
 import CooksCorner.CooksCorner.models.Ingredient;
 import CooksCorner.CooksCorner.models.Photo;
@@ -143,5 +144,10 @@ public class RecipeService {
     public List<Ingredient> findIngredientsByRecipeId(Long recipeId) {
 
         return ingredientRepository.findbyRecipeId(recipeId);
+    }
+
+    public List<RecipeResponseByCategory> findRecipesByCategory(Category category) {
+
+        return recipeRepository.findRecipesByCategory(path, category);
     }
 }

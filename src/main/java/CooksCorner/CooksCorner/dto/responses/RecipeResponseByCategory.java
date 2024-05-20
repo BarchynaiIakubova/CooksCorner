@@ -6,7 +6,9 @@ public record RecipeResponseByCategory(
 
         String recipeName,
 
-        String createdBy
+        String createdBy,
+
+        String photoLink
 
 
 ) {

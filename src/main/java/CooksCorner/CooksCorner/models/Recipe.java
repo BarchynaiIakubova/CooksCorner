@@ -35,12 +35,6 @@ public class Recipe {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-//    @OneToOne
-//    private Photo photo;
-
     @ManyToOne
     private User createdByWhom;
-
-
-
 }
