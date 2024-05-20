@@ -5,6 +5,7 @@ import CooksCorner.CooksCorner.exceptions.BadRequestException;
 import CooksCorner.CooksCorner.models.Photo;
 import CooksCorner.CooksCorner.repositories.PhotoRepository;
 import CooksCorner.CooksCorner.validations.PhotoValidate;
+import CooksCorner.CooksCorner.validations.UserValidate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class S3Service {
 
     private final PhotoValidate photoValidate;
 
+
     @Value("${cloud.aws.bucket.name}")
     private String bucketName;
 
@@ -35,6 +37,8 @@ public class S3Service {
 
 
     public PhotoResponse upload(MultipartFile file) {
+
+
 
         String key = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
 
@@ -67,7 +71,8 @@ public class S3Service {
                     .bucket(bucketName)
                     .key(key)
                     .build());
-            photoRepository.delete(photoValidate.findByImageByLink(key));
+
+            photoRepository.delete(photoValidate.findPhotoByLink(fileLink));
 
         } catch (S3Exception e) {
 

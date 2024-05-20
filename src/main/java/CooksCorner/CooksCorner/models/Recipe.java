@@ -35,7 +35,8 @@ public class Recipe {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    private String picture;
+//    @OneToOne
+//    private Photo photo;
 
     @ManyToOne
     private User createdByWhom;

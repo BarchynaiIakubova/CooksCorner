@@ -25,7 +25,7 @@ public class Ingredient {
 
     private String unit;
 
-    @OneToOne
+    @ManyToOne
     private Recipe recipe;
 
 }

@@ -34,7 +34,7 @@ public class UserValidate {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        return (User) userRepository.findIdByEmail(
-                authentication.getName()).orElseThrow(() -> new NotFoundException("the user is not found"));
+        return userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new NotFoundException("the user is not found"));
     }
 }

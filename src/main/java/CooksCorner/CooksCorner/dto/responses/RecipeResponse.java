@@ -1,13 +1,16 @@
-package CooksCorner.CooksCorner.dto.requests;
+package CooksCorner.CooksCorner.dto.responses;
 
 import CooksCorner.CooksCorner.enums.Category;
 import CooksCorner.CooksCorner.enums.Difficulty;
-import CooksCorner.CooksCorner.models.Ingredient;
-import CooksCorner.CooksCorner.models.User;
 
 import java.util.List;
 
-public record RecipeRequest(
+public record RecipeResponse(
+
+        String createdBy,
+
+        Long id,
+
         String name,
 
         String preparationTime,
@@ -18,11 +21,13 @@ public record RecipeRequest(
 
         Category category,
 
-        String photoLink,
+        PhotoResponseForGetting photoResponse,
 
-//        Long userId,
+        List<IngredientResponse> ingredientResponses
 
-        List<IngredientRequest> ingredients
 ) {
+
+
+
 
 }
