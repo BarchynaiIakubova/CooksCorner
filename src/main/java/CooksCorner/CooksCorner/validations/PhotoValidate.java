@@ -25,6 +25,11 @@ public class PhotoValidate {
 
     public Photo findPhotoByLink(String link) {
 
+        System.out.println(link);
+        if (link == null) {
+            throw new IllegalArgumentException("Link cannot be null");
+        }
+
         return photoRepository.findByLink(link.substring(path.length())).orElseThrow(
                 () -> new NotFoundException("Photo not found")
         );
