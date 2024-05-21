@@ -22,4 +22,9 @@ public interface PhotoRepository extends JpaRepository<Photo, Long> {
         from Photo p where p.recipe.id = :recipeId
            """)
     Photo findPhotoByRecipeId(Long recipeId);
+
+    @Query("""
+        select p from Photo p where p.user.id = :userId
+""")
+    Photo findPhotoByUserId(Long userId);
 }
