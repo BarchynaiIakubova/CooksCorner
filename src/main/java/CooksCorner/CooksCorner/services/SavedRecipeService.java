@@ -1,39 +1,39 @@
 package CooksCorner.CooksCorner.services;
 
-import CooksCorner.CooksCorner.dto.responses.Response;
+import CooksCorner.CooksCorner.models.SavedRecipes;
 import CooksCorner.CooksCorner.models.User;
 import CooksCorner.CooksCorner.models.UserLikeRecipe;
-import CooksCorner.CooksCorner.repositories.UserLikeRecipeRepository;
+import CooksCorner.CooksCorner.repositories.SavedRecipeRepository;
 import CooksCorner.CooksCorner.validations.UserValidate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserLikeRecipeService {
+public class SavedRecipeService {
 
-    private final UserLikeRecipeRepository userLikeRecipeRepository;
+    private final SavedRecipeRepository savedRecipeRepository;
 
     private final UserValidate userValidate;
 
-    public Integer likeRecipe(Long recipeId) {
 
+    public Integer saveRecipe(Long recipeId) {
         User user = userValidate.getByAuthentication();
 
-        userLikeRecipeRepository.save(UserLikeRecipe.builder()
+        savedRecipeRepository.save(SavedRecipes.builder()
                 .recipeId(recipeId)
                 .userId(user.getId())
                 .build());
 
-        return userLikeRecipeRepository.likeRecipe(recipeId);
+        return savedRecipeRepository.saveRecipe(recipeId);
     }
 
-    public Integer removeLikeRecipe(Long recipeId) {
+    public Integer deleteSavedRecipe(Long recipeId) {
 
         User user = userValidate.getByAuthentication();
 
-        userLikeRecipeRepository.removeLikeRecipe(user.getId(), recipeId);
+        savedRecipeRepository.removeSavedRecipe(user.getId(), recipeId);
 
-        return userLikeRecipeRepository.likeRecipe(recipeId);
+        return savedRecipeRepository.saveRecipe(recipeId);
     }
 }

@@ -27,6 +27,8 @@ public class UserService {
 
     private final S3Service s3Service;
 
+
+
     @Value("${cloud.aws.bucket.path}")
     private String path;
 
@@ -53,5 +55,15 @@ public class UserService {
         userRepository.save(user);
 
         return new Response("The profile is updated");
+    }
+
+
+    public Integer followUser(Long userId) {
+
+        User user = userValidate.getByAuthentication();
+
+
+
+        return null;
     }
 }
