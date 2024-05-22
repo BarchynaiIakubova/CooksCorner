@@ -27,5 +27,10 @@ public class UserController {
         return userService.fillProfile(userRequest);
     }
 
+    @PostMapping("/{userId}")
+    @Operation(summary = "follower and following", description = "This method allows to follow a user and to be followed")
+    Integer followUser(@PathVariable Long userId) {
 
+        return userService.followUser(userId);
+    }
 }

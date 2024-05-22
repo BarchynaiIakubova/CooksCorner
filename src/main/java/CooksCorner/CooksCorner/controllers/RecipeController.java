@@ -63,4 +63,8 @@ public class RecipeController {
         return recipeService.findRecipesByCategory(category);
     }
 
+//    @GetMapping("/{userId}")
+//    @Operation(summary = "get recipes by user", description = "This method gets recipes by user")
+//    List<>
+
 }
