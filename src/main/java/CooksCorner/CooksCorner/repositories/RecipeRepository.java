@@ -1,5 +1,6 @@
 package CooksCorner.CooksCorner.repositories;
 
+import CooksCorner.CooksCorner.dto.responses.RecipeByCategoryResponse;
 import CooksCorner.CooksCorner.dto.responses.RecipeResponseByCategory;
 import CooksCorner.CooksCorner.dto.responses.RecipeResponseSearch;
 import CooksCorner.CooksCorner.enums.Category;
@@ -25,14 +26,47 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 """)
     List<RecipeResponseSearch> searchRecipes(String path, String search, Pageable pageable);
 
-    @Query("""
-            select new CooksCorner.CooksCorner.dto.responses.RecipeResponseByCategory(
-            r.id,
-            r.name,
-            r.createdByWhom.fullName,
-            concat(:path, p.link)) from Recipe r
-            inner join Photo p on p.recipe.id = r.id
-            where r.category = :category
-          """)
-    List<RecipeResponseByCategory> findRecipesByCategory(String path, Category category);
+//    @Query("""
+//            select new CooksCorner.CooksCorner.dto.responses.RecipeResponseByCategory(
+//            r.id,
+//            r.name,
+//            r.createdByWhom.fullName,
+//            concat(:path, p.link)) from Recipe r
+//            inner join Photo p on p.recipe.id = r.id
+//            where r.category = :category
+//          """)
+//    List<RecipeResponseByCategory> findRecipesByCategory(String path, Category category);
+
+//    @Query("""
+//    select new CooksCorner.CooksCorner.dto.responses.RecipeResponseByCategory(
+//        r.id,
+//        r.name,
+//        r.createdByWhom.fullName,
+//        concat(:path, p.link),
+//        (select count(ulr) from UserLikeRecipe ulr where ulr.recipeId = r.id),
+//        (select count (sr) from SavedRecipes sr where sr.recipeId = r.id)
+//    )
+//    from Recipe r
+//    inner join Photo p on p.recipe.id = r.id
+//    where r.category = :category
+//           """)
+//    List<RecipeResponseByCategory> findRecipesByCategory(String path, Category category);
+
+//    @Query("""
+//            select new CooksCorner.CooksCorner.dto.responses.RecipeByCategoryResponse(
+//             r.id,
+//                    r.name,
+//                    r.createdByWhom.fullName,
+//                    concat(:path, p.link),
+//                    (select count(ulr) from UserLikeRecipe ulr where ulr.recipeId = r.id),
+//                    (select count (sr) from SavedRecipes sr where sr.recipeId = r.id)
+//                )
+//                from Recipe r
+//                inner join Photo p on p.recipe.id = r.id
+//                where r.category = :category
+//                GROUP BY r.id, r.name, r.createdByWhom.fullName, p.link
+//           """)
+
+    List<RecipeByCategoryResponse> findRecipesByCategory(String path, Category category);
+
 }

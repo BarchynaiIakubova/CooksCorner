@@ -1,6 +1,11 @@
 package CooksCorner.CooksCorner.dto.responses;
 
-public record RecipeResponseByCategory(
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+public record RecipeResponseByCategory (
 
         Long id,
 
@@ -10,6 +15,25 @@ public record RecipeResponseByCategory(
 
         String photoLink
 
-
 ) {
 }
+
+
+
+//public record RecipeResponseByCategory(
+//
+//        Long id,
+//
+//        String recipeName,
+//
+//        String createdBy,
+//
+//        String photoLink,
+//
+//        Integer numberOfLikes,
+//
+//        Integer numberOfSaves
+//
+//
+//) {
+//}

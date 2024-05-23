@@ -8,9 +8,7 @@ import CooksCorner.CooksCorner.exceptions.NotFoundException;
 import CooksCorner.CooksCorner.models.Ingredient;
 import CooksCorner.CooksCorner.models.Photo;
 import CooksCorner.CooksCorner.models.Recipe;
-import CooksCorner.CooksCorner.repositories.IngredientRepository;
-import CooksCorner.CooksCorner.repositories.PhotoRepository;
-import CooksCorner.CooksCorner.repositories.RecipeRepository;
+import CooksCorner.CooksCorner.repositories.*;
 import CooksCorner.CooksCorner.validations.PhotoValidate;
 import CooksCorner.CooksCorner.validations.UserValidate;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +34,10 @@ public class RecipeService {
     private final PhotoValidate photoValidate;
 
     private final S3Service s3Service;
+
+    private final UserLikeRecipeRepository userLikeRecipeRepository;
+
+    private final SavedRecipeRepository savedRecipeRepository;
 
     @Value("${cloud.aws.bucket.path}")
     private String path;
@@ -146,7 +148,7 @@ public class RecipeService {
         return ingredientRepository.findbyRecipeId(recipeId);
     }
 
-    public List<RecipeResponseByCategory> findRecipesByCategory(Category category) {
+    public List<RecipeByCategoryResponse> findRecipesByCategory(Category category) {
 
         return recipeRepository.findRecipesByCategory(path, category);
     }
