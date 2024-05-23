@@ -1,7 +1,5 @@
 package CooksCorner.CooksCorner.repositories;
 
-import CooksCorner.CooksCorner.dto.responses.RecipeByCategoryResponse;
-import CooksCorner.CooksCorner.dto.responses.RecipeResponseByCategory;
 import CooksCorner.CooksCorner.dto.responses.RecipeResponseSearch;
 import CooksCorner.CooksCorner.enums.Category;
 import CooksCorner.CooksCorner.models.Recipe;
@@ -67,6 +65,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 //                GROUP BY r.id, r.name, r.createdByWhom.fullName, p.link
 //           """)
 
-    List<RecipeByCategoryResponse> findRecipesByCategory(String path, Category category);
+    //    List<RecipeByCategoryResponse> findRecipesByCategory(String path, Category category);
+    List<Recipe> findAllByCategory(Category category);
 
 }

@@ -23,4 +23,6 @@ public interface UserLikeRecipeRepository extends JpaRepository<UserLikeRecipe, 
             where ulr.userId = :userId and ulr.recipeId = :recipeId
         """)
     void removeLikeRecipe(Long userId, Long recipeId);
+
+    Integer countAllByRecipeId(Long recipeId);
 }
