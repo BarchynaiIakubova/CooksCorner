@@ -1,6 +1,7 @@
 package CooksCorner.CooksCorner.repositories;
 
 import CooksCorner.CooksCorner.models.Photo;
+import CooksCorner.CooksCorner.models.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -27,4 +28,7 @@ public interface PhotoRepository extends JpaRepository<Photo, Long> {
         select p from Photo p where p.user.id = :userId
 """)
     Photo findPhotoByUserId(Long userId);
+
+    Optional<Photo> findByRecipe(Recipe recipe);
+
 }

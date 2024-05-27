@@ -2,10 +2,11 @@ package CooksCorner.CooksCorner.services;
 
 import CooksCorner.CooksCorner.dto.responses.PhotoResponse;
 import CooksCorner.CooksCorner.exceptions.BadRequestException;
+import CooksCorner.CooksCorner.exceptions.NotFoundException;
 import CooksCorner.CooksCorner.models.Photo;
+import CooksCorner.CooksCorner.models.Recipe;
 import CooksCorner.CooksCorner.repositories.PhotoRepository;
 import CooksCorner.CooksCorner.validations.PhotoValidate;
-import CooksCorner.CooksCorner.validations.UserValidate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,6 @@ public class S3Service {
 
 
     public PhotoResponse upload(MultipartFile file) {
-
 
 
         String key = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
@@ -84,5 +84,12 @@ public class S3Service {
         }
 
     }
+
+    public Photo getByRecipe(Recipe recipe) {
+        return photoRepository.findByRecipe(recipe).orElseThrow(
+                () -> new NotFoundException("не найдена картина рецепта с id %s".formatted(recipe.getId()))
+        );
+    }
+
 
 }

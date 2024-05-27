@@ -8,9 +8,7 @@ import CooksCorner.CooksCorner.exceptions.NotFoundException;
 import CooksCorner.CooksCorner.models.Ingredient;
 import CooksCorner.CooksCorner.models.Photo;
 import CooksCorner.CooksCorner.models.Recipe;
-import CooksCorner.CooksCorner.repositories.IngredientRepository;
-import CooksCorner.CooksCorner.repositories.PhotoRepository;
-import CooksCorner.CooksCorner.repositories.RecipeRepository;
+import CooksCorner.CooksCorner.repositories.*;
 import CooksCorner.CooksCorner.validations.PhotoValidate;
 import CooksCorner.CooksCorner.validations.UserValidate;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,13 +28,19 @@ public class RecipeService {
 
     private final UserValidate userValidate;
 
+    private final UserLikeRecipeService userLikeRecipeService;
+
     private final IngredientRepository ingredientRepository;
 
-    private final PhotoRepository photoRepository;
+    private final PhotoRepository photoRepository;//todo убрать
 
     private final PhotoValidate photoValidate;
 
     private final S3Service s3Service;
+
+    private final UserLikeRecipeRepository userLikeRecipeRepository;
+
+    private final SavedRecipeRepository savedRecipeRepository;//todo убрать
 
     @Value("${cloud.aws.bucket.path}")
     private String path;
@@ -146,8 +151,37 @@ public class RecipeService {
         return ingredientRepository.findbyRecipeId(recipeId);
     }
 
-    public List<RecipeResponseByCategory> findRecipesByCategory(Category category) {
+    public List<RecipeByCategoryResponse> findRecipesByCategory(Category category) {
 
-        return recipeRepository.findRecipesByCategory(path, category);
+//        return recipeRepository.findRecipesByCategory(path, category);
+
+
+        List<RecipeByCategoryResponse> result = new ArrayList<>();
+
+        List<Recipe> recipes = recipeRepository.findAllByCategory(category);
+        recipes.forEach(
+                recipe -> {
+                    Photo photo = s3Service.getByRecipe(recipe);
+                    Integer countOfLikes = userLikeRecipeService.getCountOfLikesByRecipeId(recipe.getId());
+                    RecipeByCategoryResponse dto = toDto(recipe, photo.getLink(), countOfLikes);
+                    result.add(dto);
+                }
+        );
+
+
+        return result;
+
+    }
+
+    private RecipeByCategoryResponse toDto(Recipe recipe, String link, Integer numberOfLikes) {
+
+        return new RecipeByCategoryResponse(
+                recipe.getId(),
+                recipe.getName(),
+                recipe.getCreatedByWhom().getFullName(),
+                String.join("", path, link),
+                numberOfLikes,
+                null
+        );
     }
 }

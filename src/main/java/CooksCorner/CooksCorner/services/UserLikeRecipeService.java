@@ -36,4 +36,9 @@ public class UserLikeRecipeService {
 
         return userLikeRecipeRepository.likeRecipe(recipeId);
     }
+
+
+    public Integer getCountOfLikesByRecipeId(Long recipeId){
+        return userLikeRecipeRepository.countAllByRecipeId(recipeId);
+    }
 }
